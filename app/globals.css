@@ -2,7 +2,50 @@
 
 @layer base {
   :root {
-    /* Primary Dark Scheme (Default & Primary Experience) */
+    /* Complete Light Theme Tokens (Default when no dark class) */
+    --background: #fafaf9;
+    --foreground: #18181b;
+    
+    /* Surfaces */
+    --surface: #f2f1ef;
+    --surface-subtle: #f8f8f7;
+    --surface-elevated: #ffffff;
+    --surface-hover: #e8e7e4;
+    
+    /* Low-contrast Borders */
+    --border: rgba(0, 0, 0, 0.08);
+    --border-subtle: rgba(0, 0, 0, 0.04);
+    --border-strong: rgba(0, 0, 0, 0.18);
+    
+    /* Primary Accent: Deep Warm Amber / Gold tuned for Light Mode (#B47820) */
+    --accent: #b47820;
+    --accent-hover: #965f12;
+    --accent-foreground: #ffffff;
+    --accent-subtle: rgba(180, 120, 32, 0.1);
+    --accent-glow: rgba(180, 120, 32, 0.22);
+    
+    /* Secondary Accent: Indigo (#6366F1) */
+    --accent-secondary: #6366f1;
+    --accent-secondary-subtle: rgba(99, 102, 241, 0.1);
+    
+    /* Muted & Secondary Text (WCAG AA Compliant > 5.5:1 ratio against #FAFAF9) */
+    --muted: #e7e5e4;
+    --muted-foreground: #52525b;
+    --faint-foreground: #71717a;
+
+    /* Theme-Adaptive Shadows */
+    --shadow-card-ambient: 0 10px 30px -10px rgba(0, 0, 0, 0.07);
+    --shadow-card-hover: 0 20px 40px -12px rgba(0, 0, 0, 0.12), 0 0 25px -5px var(--accent-glow);
+    
+    /* Ambient Glow Opacity */
+    --ambient-opacity: 0.35;
+    
+    /* Glass Panel Surface */
+    --glass-bg: rgba(255, 255, 255, 0.82);
+  }
+
+  .dark {
+    /* Complete Dark Theme Tokens */
     --background: #0a0a0b;
     --foreground: #f5f5f4;
     
@@ -32,33 +75,16 @@
     --muted: #1c1e24;
     --muted-foreground: #9ca3af;
     --faint-foreground: #6b7280;
-  }
 
-  .light {
-    --background: #fafaf9;
-    --foreground: #0c0a09;
+    /* Theme-Adaptive Shadows */
+    --shadow-card-ambient: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+    --shadow-card-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 25px -5px var(--accent-glow);
     
-    --surface: #f5f5f4;
-    --surface-subtle: #fbfbfb;
-    --surface-elevated: #ffffff;
-    --surface-hover: #e7e5e4;
+    /* Ambient Glow Opacity */
+    --ambient-opacity: 1;
     
-    --border: rgba(0, 0, 0, 0.08);
-    --border-subtle: rgba(0, 0, 0, 0.04);
-    --border-strong: rgba(0, 0, 0, 0.18);
-    
-    --accent: #b47820;
-    --accent-hover: #965f12;
-    --accent-foreground: #ffffff;
-    --accent-subtle: rgba(180, 120, 32, 0.1);
-    --accent-glow: rgba(180, 120, 32, 0.2);
-    
-    --accent-secondary: #6366f1;
-    --accent-secondary-subtle: rgba(99, 102, 241, 0.1);
-    
-    --muted: #f5f5f4;
-    --muted-foreground: #78716c;
-    --faint-foreground: #a8a29e;
+    /* Glass Panel Surface */
+    --glass-bg: rgba(18, 19, 22, 0.75);
   }
 }
 
@@ -101,9 +127,17 @@
 }
 
 html {
-  color-scheme: dark;
   scroll-behavior: smooth;
   overflow-x: hidden;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.light,
+html:not(.dark) {
+  color-scheme: light;
 }
 
 /* Lenis Recommended CSS */
@@ -139,14 +173,34 @@ body {
   width: 100%;
 }
 
-/* Global Transition Utility for interactive elements */
-a, button, input, select, textarea, [role="button"] {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+/* Scoped Theme Color Transition for Smooth Switching (color properties only, never transform/opacity) */
+body,
+header,
+footer,
+nav,
+section,
+div,
+article,
+aside,
+main,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+button,
+input,
+textarea {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
   transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Custom Minimal Dark Scrollbar */
+/* Custom Minimal Scrollbar */
 ::-webkit-scrollbar {
   width: 7px;
 }
@@ -167,7 +221,7 @@ a, button, input, select, textarea, [role="button"] {
 
 /* Glassmorphism & Surface Utilities */
 .glass-panel {
-  background: rgba(18, 19, 22, 0.72);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border);

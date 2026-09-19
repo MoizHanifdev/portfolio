@@ -22,13 +22,13 @@ export function ResumeCard({
 }: ResumeCardProps) {
   return (
     <div className="relative rounded-xl overflow-hidden bg-surface border border-accent/30 hover:border-accent/70 hover:shadow-card-hover transition-all duration-300 shadow-card-ambient flex flex-col justify-between h-full group before:absolute before:top-0 before:left-0 before:right-0 before:h-[3px] before:bg-gradient-to-r before:from-accent before:via-accent-hover before:to-accent before:z-20">
-      {/* 4:3 Aspect Ratio Edge-to-Edge Image Frame with Link */}
+      {/* 4:3 Aspect Ratio Edge-to-Edge Image Frame with dark viewport matting */}
       <a
         href={pdfUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="View full resume PDF in a new tab"
-        className="relative w-full aspect-[4/3] bg-surface-subtle overflow-hidden block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent group/thumb"
+        className="relative w-full aspect-[4/3] bg-[#121316] border-b border-border/60 overflow-hidden block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent group/thumb"
       >
         <Image
           src={thumbnail}
@@ -38,22 +38,19 @@ export function ResumeCard({
           className="object-cover object-top transition-transform duration-500 ease-out group-hover/thumb:scale-105 group-hover:scale-105"
         />
 
-        {/* Soft Gradient Overlay at bottom of thumbnail for smooth blending */}
-        <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/30 to-transparent opacity-85 pointer-events-none" />
-
         {/* Floating Semi-Transparent PDF Badge */}
         <div className="absolute top-2.5 right-2.5 z-10 pointer-events-none">
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-surface-elevated/90 backdrop-blur-md border border-border/80 text-accent shadow-sm">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-[#181a22]/90 backdrop-blur-md border border-white/10 text-accent shadow-sm">
             PDF · 1 Page
           </span>
         </div>
 
         {/* Hover Overlay with Open PDF Hint */}
-        <div className="absolute inset-0 bg-background/50 backdrop-blur-[2px] opacity-0 group-hover/thumb:opacity-100 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-1.5 text-accent pointer-events-none">
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover/thumb:opacity-100 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-1.5 text-accent pointer-events-none">
           <div className="h-9 w-9 rounded-full bg-surface-elevated/90 border border-accent/40 flex items-center justify-center shadow-accent-glow-sm">
             <Eye className="h-4 w-4 text-accent" />
           </div>
-          <span className="text-[10px] font-mono tracking-wider uppercase font-semibold text-foreground">
+          <span className="text-[10px] font-mono tracking-wider uppercase font-semibold text-white">
             Open PDF
           </span>
         </div>

@@ -7,6 +7,7 @@ import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SITE_CONFIG } from "@/lib/constants";
 
 const inter = Inter({
@@ -144,7 +145,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} dark scroll-smooth`}
+      suppressHydrationWarning
+      className={`${inter.variable} ${spaceGrotesk.variable} scroll-smooth`}
     >
       <head>
         <script
@@ -153,25 +155,32 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-background text-foreground antialiased selection:bg-accent/20 selection:text-accent relative flex flex-col w-full overflow-x-hidden">
-        {/* Accessible Skip to Content Link */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:bg-accent focus:text-accent-foreground focus:font-semibold focus:rounded-lg focus:shadow-accent-glow-sm focus:outline-none transition-all"
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
         >
-          Skip to main content
-        </a>
+          {/* Accessible Skip to Content Link */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:bg-accent focus:text-accent-foreground focus:font-semibold focus:rounded-lg focus:shadow-accent-glow-sm focus:outline-none transition-all"
+          >
+            Skip to main content
+          </a>
 
-        {/* Global Scroll Progress Bar */}
-        <ScrollProgress />
+          {/* Global Scroll Progress Bar */}
+          <ScrollProgress />
 
-        <SmoothScroll>
-          <AmbientBackground />
-          <Header />
-          <PageTransition className="relative z-10 flex-1 flex flex-col w-full">
-            {children}
-          </PageTransition>
-          <Footer />
-        </SmoothScroll>
+          <SmoothScroll>
+            <AmbientBackground />
+            <Header />
+            <PageTransition className="relative z-10 flex-1 flex flex-col w-full">
+              {children}
+            </PageTransition>
+            <Footer />
+          </SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

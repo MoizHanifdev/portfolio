@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { NAV_CONFIG } from "@/content/nav";
 import { SITE_PROFILE } from "@/content/site";
 import { Menu, X, ArrowRight } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -131,8 +132,9 @@ export function Header() {
               })}
             </nav>
 
-            {/* Desktop CTA Button */}
-            <div className="hidden md:flex items-center gap-4">
+            {/* Desktop CTA & Theme Toggle */}
+            <div className="hidden md:flex items-center gap-3">
+              <ThemeToggle size="sm" />
               <Button
                 variant="primary"
                 size="sm"
@@ -143,20 +145,23 @@ export function Header() {
               </Button>
             </div>
 
-            {/* Mobile Hamburger Toggle Button */}
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden relative z-50 p-2 text-foreground/80 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
-              aria-expanded={mobileMenuOpen}
-              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            >
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6 text-foreground" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </button>
+            {/* Mobile Controls (Theme Toggle + Hamburger) */}
+            <div className="md:hidden flex items-center gap-2 relative z-50">
+              <ThemeToggle size="sm" />
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 text-foreground/80 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
+                aria-expanded={mobileMenuOpen}
+                aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              >
+                {mobileMenuOpen ? (
+                  <X className="h-6 w-6 text-foreground" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
         </Container>
       </header>
@@ -205,13 +210,20 @@ export function Header() {
               })}
             </nav>
 
-            {/* Mobile CTA & Quick Details */}
+            {/* Mobile CTA & Theme Toggle Row */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, duration: 0.35 }}
               className="space-y-4 pt-6 border-t border-border"
             >
+              <div className="flex items-center justify-between py-1">
+                <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground font-semibold">
+                  Switch Theme
+                </span>
+                <ThemeToggle size="sm" />
+              </div>
+
               <Button
                 variant="primary"
                 size="lg"

@@ -97,8 +97,8 @@ const config: Config = {
       boxShadow: {
         "accent-glow": "0 0 35px -5px var(--accent-glow)",
         "accent-glow-sm": "0 0 16px -3px var(--accent-glow)",
-        "card-ambient": "0 20px 40px -15px rgba(0, 0, 0, 0.6)",
-        "card-hover": "0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 25px -5px var(--accent-glow)",
+        "card-ambient": "var(--shadow-card-ambient)",
+        "card-hover": "var(--shadow-card-hover)",
       },
       transitionDuration: {
         fast: "200ms",

@@ -88,8 +88,8 @@ export function CertificatesShowcase({
               className="group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-xl h-full flex flex-col"
             >
               <div className="h-full p-0 overflow-hidden rounded-xl border border-border/80 hover:border-accent/60 hover:shadow-card-hover transition-all duration-300 shadow-card-ambient flex flex-col justify-between bg-surface group-hover:-translate-y-1">
-                {/* 4:3 Aspect Ratio Edge-to-Edge Image Frame */}
-                <div className="relative w-full aspect-[4/3] bg-surface-subtle overflow-hidden">
+                {/* 4:3 Aspect Ratio Edge-to-Edge Image Frame with dark viewport matting */}
+                <div className="relative w-full aspect-[4/3] bg-[#121316] border-b border-border/60 overflow-hidden">
                   <Image
                     src={cert.image}
                     alt={`${cert.name} Certificate`}
@@ -98,15 +98,12 @@ export function CertificatesShowcase({
                     className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
                   />
 
-                  {/* Soft Gradient Overlay at bottom of image for seamless card blending */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/30 to-transparent opacity-85 pointer-events-none" />
-
                   {/* Subtle Hover Overlay with Inspect Hint */}
-                  <div className="absolute inset-0 bg-background/50 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-1 text-accent pointer-events-none">
+                  <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-1 text-accent pointer-events-none">
                     <div className="h-9 w-9 rounded-full bg-surface-elevated/90 border border-accent/40 flex items-center justify-center shadow-accent-glow-sm">
                       <Eye className="h-4 w-4 text-accent" />
                     </div>
-                    <span className="text-[10px] font-mono tracking-wider uppercase font-semibold text-foreground">
+                    <span className="text-[10px] font-mono tracking-wider uppercase font-semibold text-white">
                       Inspect
                     </span>
                   </div>
